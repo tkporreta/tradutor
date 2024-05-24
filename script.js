@@ -2,12 +2,15 @@ async function translateAndDownload() {
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
 
+    const sourceLang = document.getElementById('sourceLang').value;
+    const targetLang = document.getElementById('targetLang').value;
+
     if (file) {
         const reader = new FileReader();
 
         reader.onload = async function(event) {
             const originalText = event.target.result;
-            const translatedText = await translateText(originalText);
+            const translatedText = await translateText(originalText, sourceLang, targetLang);
             downloadFile(translatedText, getTranslatedFileName(file.name));
         };
 
@@ -17,16 +20,16 @@ async function translateAndDownload() {
     }
 }
 
-async function translateText(originalText) {
+async function translateText(originalText, sourceLang, targetLang) {
     const lines = originalText.split('\n');
     let translatedText = '';
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         if (shouldIgnoreTranslation(line)) {
-            translatedText += line + '\n'; // Mantém a linha original se deve ser ignorada
+            translatedText += line + '\n'; // MantÃ©m a linha original se deve ser ignorada
         } else {
-            const translatedLine = await translateLine(line);
+            const translatedLine = await translateLine(line, sourceLang, targetLang);
             translatedText += translatedLine + '\n';
         }
         updateProgressBar(i + 1, lines.length);
@@ -35,26 +38,26 @@ async function translateText(originalText) {
     return translatedText;
 }
 
-async function translateLine(line) {
+async function translateLine(line, sourceLang, targetLang) {
     const regex = /"([^"]*)"/g;
     let translatedLine = line;
     const matches = [...line.matchAll(regex)];
 
     for (let i = 0; i < matches.length; i++) {
         const textInsideQuotes = matches[i][1];
-        // Ignora a tradução se for o segundo texto em aspas duplas em uma linha npctalk
+        // Ignora a traduÃ§Ã£o se for o segundo texto em aspas duplas em uma linha npctalk
         if (matches.length > 1 && line.includes('npctalk') && i === 1) {
             continue;
         }
-        const translatedSpeech = await translateSpeech(textInsideQuotes.trim());
+        const translatedSpeech = await translateSpeech(textInsideQuotes.trim(), sourceLang, targetLang);
         translatedLine = translatedLine.replace(`"${textInsideQuotes}"`, `"${translatedSpeech}"`);
     }
 
     return translatedLine;
 }
 
-async function translateSpeech(text) {
-    const apiUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURI(text)}`;
+async function translateSpeech(text, sourceLang, targetLang) {
+    const apiUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURI(text)}`;
 
     try {
         const response = await fetch(apiUrl);
