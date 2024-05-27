@@ -97,7 +97,7 @@ function updateProgressBar(current, total) {
 }
 
 function shouldIgnoreTranslation(line) {
-    const keywords = ['killmonster', 'playBGM', 'getstatus', 'replacestr', 'warp', 'killmonster', 'unitskilluseid', 'detachnpctimer', 'attachnpctimer', 'getnpctimer', 'setnpctimer', 'startnpctimer', 'stopnpctimer', 'initnpctimer', 'duplicate_dynamic', 'duplicate' ,'callfunc', 'goto', 'getvar', 'unloadnpc', 'enablenpc', 'disablenpc', 'getvariableofnpc', 'cloakonnpcself', 'cloakoffnpcself', 'doevent', 'donpcevent', 'isnpccloaked', 'cloakoffnpc', 'cloakonnpc', 'instance_create', 'instance_npcname', 'duplicate', 'instance_live_info', 'atoi', 'cutin'];
+    const keywords = ['instance_mapname', 'getnpcid', 'instance_enter', 'killmonster', 'playBGM', 'getstatus', 'replacestr', 'warp', 'killmonster', 'unitskilluseid', 'detachnpctimer', 'attachnpctimer', 'getnpctimer', 'setnpctimer', 'startnpctimer', 'stopnpctimer', 'initnpctimer', 'duplicate_dynamic', 'duplicate' ,'callfunc', 'goto', 'getvar', 'unloadnpc', 'enablenpc', 'disablenpc', 'getvariableofnpc', 'cloakonnpcself', 'cloakoffnpcself', 'doevent', 'donpcevent', 'isnpccloaked', 'cloakoffnpc', 'cloakonnpc', 'instance_create', 'instance_npcname', 'duplicate', 'instance_live_info', 'atoi', 'cutin'];
     for (const keyword of keywords) {
         if (line.includes(keyword)) {
             return true;
