@@ -97,7 +97,7 @@ function updateProgressBar(current, total) {
 }
 
 function shouldIgnoreTranslation(line) {
-    const keywords = ['cloakoffnpc', 'cloakonnpc', 'instance_create', 'instance_npcname', 'duplicate', 'instance_live_info', 'atoi', 'cutin'];
+    const keywords = ['disablenpc', 'getvariableofnpc', 'cloakoffnpc', 'cloakonnpc', 'instance_create', 'instance_npcname', 'duplicate', 'instance_live_info', 'atoi', 'cutin'];
     for (const keyword of keywords) {
         if (line.includes(keyword)) {
             return true;
