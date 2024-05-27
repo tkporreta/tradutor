@@ -39,7 +39,7 @@ async function translateText(originalText, sourceLang, targetLang) {
 }
 
 async function translateLine(line, sourceLang, targetLang) {
-    const regex = /"([^"]*)"/g;
+    const regex = /"(.*?)"/g;
     let translatedLine = line;
     const matches = [...line.matchAll(regex)];
 
