@@ -103,7 +103,8 @@ function shouldIgnoreTranslation(line) {
                       'startnpctimer', 'stopnpctimer', 'initnpctimer', 'duplicate_dynamic', 'duplicate' ,'callfunc', 'goto',
                       'getvar', 'unloadnpc', 'enablenpc', 'disablenpc', 'getvariableofnpc', 'cloakonnpcself', 'cloakoffnpcself',
                       'doevent', 'donpcevent', 'isnpccloaked', 'cloakoffnpc', 'cloakonnpc', 'instance_create', 'instance_npcname',
-                      'duplicate', 'instance_live_info', 'atoi', 'cutin', 'hideonnpc', 'hideofnpc', 'OnMyMobDeath', 'bindatcmd'];
+                      'duplicate', 'instance_live_info', 'atoi', 'cutin', 'hideonnpc', 'hideofnpc', 'OnMyMobDeath', 'bindatcmd',
+                      'query_sql'];
     for (const keyword of keywords) {
         if (line.includes(keyword)) {
             return true;
